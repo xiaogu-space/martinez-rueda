@@ -109,22 +109,24 @@ func (p *Polygon) ToPolygonGeometry() *geojson.Geometry {
 	multiPolygon := g.MultiPolygon
 
 	for _, con := range p.contours {
-		line := g.LineString
+		con.clockwise()
 
+		line := g.LineString
 		for _, point := range con.points {
 			line = append(line, []float64{point[0], point[1]})
 		}
 
-		if con.cc { //内边框
+		if con.cc { //外边框
+			polygon := g.Polygon
+			polygon = [][][]float64{line}
+
+			multiPolygon = append(multiPolygon, polygon)
+		} else { //内边框
 			//理论上来说已经存在一个面了
 			polygon := multiPolygon[len(multiPolygon)-1]
 			polygon = append(polygon, line)
 
-			multiPolygon = append(multiPolygon, polygon)
-		} else { //外边框
-			polygon := g.Polygon
-			polygon = [][][]float64{line}
-
+			multiPolygon = multiPolygon[:len(multiPolygon)-1]
 			multiPolygon = append(multiPolygon, polygon)
 		}
 	}

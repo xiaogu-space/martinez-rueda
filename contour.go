@@ -10,7 +10,7 @@ type Contour struct {
 	points []orb.Point
 	// holes  []int
 	// isExternal    bool
-	cc bool //false:为外，true:为内
+	cc bool //true:为外，false:为内
 	// precomputedCC *bool
 }
 

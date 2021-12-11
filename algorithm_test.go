@@ -59,34 +59,45 @@ func TestCompute(t *testing.T) {
 
 	point0s := []orb.Point{
 		{-120, 60},
-		{
-			-120,
-			-60},
-		{
-			120,
-			-60},
-		{
-			120,
-			60},
-		{
-			-120,
-			60}}
+		{-120, -60},
+		{120, -60},
+		{120, 60},
+		{-120, 60}}
 	contour0 := NewContour(point0s)
-	polygon0 := NewPolygon([]Contour{contour0})
+	point01s := []orb.Point{
+		{-60, 30},
+		{60, 30},
+		{60, -30},
+		{-60, -30},
+		{-60, 30}}
+	contour01 := NewContour(point01s)
+
+	aa := contour0.clockwise()
+	_ = aa
+
+	bb := contour01.clockwise()
+	_ = bb
+
+	polygon0 := NewPolygon([]Contour{contour0, contour01})
 
 	point1s := []orb.Point{
 		{
-			115.77392578125,
-			35.746512259918504}, {
-			118.30078125,
-			35.746512259918504}, {
-			118.30078125,
-			37.64903402157866}, {
-			115.77392578125,
-			37.64903402157866}, {
-			115.77392578125,
-			35.746512259918504}}
+			165.58593749999997,
+			39.095962936305476},
+		{
+			216.9140625,
+			39.095962936305476},
+		{
+			216.9140625,
+			63.704722429433225},
+		{
+			165.58593749999997,
+			63.704722429433225},
+		{
+			165.58593749999997,
+			39.095962936305476}}
 	contour1 := NewContour(point1s)
+	contour1.clockwise()
 	polygon1 := NewPolygon([]Contour{contour1})
 
 	type args struct {
