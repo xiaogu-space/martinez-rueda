@@ -57,6 +57,45 @@ func TestCompute(t *testing.T) {
 	// contour1 := NewContour(point1s)
 	// polygon1 := NewPolygon([]Contour{contour1})
 
+	// point0s := []orb.Point{
+	// 	{-120, 60},
+	// 	{-120, -60},
+	// 	{120, -60},
+	// 	{120, 60},
+	// 	{-120, 60}}
+	// contour0 := NewContour(point0s)
+	// point01s := []orb.Point{
+	// 	{-60, 30},
+	// 	{60, 30},
+	// 	{60, -30},
+	// 	{-60, -30},
+	// 	{-60, 30}}
+	// contour01 := NewContour(point01s)
+	// contour0.clockwise()
+	// contour01.clockwise()
+
+	// polygon0 := NewPolygon([]Contour{contour0, contour01})
+
+	// point1s := []orb.Point{
+	// 	{
+	// 		165.58593749999997,
+	// 		39.095962936305476},
+	// 	{
+	// 		216.9140625,
+	// 		39.095962936305476},
+	// 	{
+	// 		216.9140625,
+	// 		63.704722429433225},
+	// 	{
+	// 		165.58593749999997,
+	// 		63.704722429433225},
+	// 	{
+	// 		165.58593749999997,
+	// 		39.095962936305476}}
+	// contour1 := NewContour(point1s)
+	// contour1.clockwise()
+	// polygon1 := NewPolygon([]Contour{contour1})
+	//************************************************
 	point0s := []orb.Point{
 		{-120, 60},
 		{-120, -60},
@@ -71,31 +110,27 @@ func TestCompute(t *testing.T) {
 		{-60, -30},
 		{-60, 30}}
 	contour01 := NewContour(point01s)
-
-	aa := contour0.clockwise()
-	_ = aa
-
-	bb := contour01.clockwise()
-	_ = bb
+	contour0.clockwise()
+	contour01.clockwise()
 
 	polygon0 := NewPolygon([]Contour{contour0, contour01})
 
 	point1s := []orb.Point{
 		{
-			165.58593749999997,
-			39.095962936305476},
+			11.25,
+			-0.7031073524364783},
 		{
-			216.9140625,
-			39.095962936305476},
+			200.390625,
+			-0.7031073524364783},
 		{
-			216.9140625,
-			63.704722429433225},
+			200.390625,
+			68.39918004344189},
 		{
-			165.58593749999997,
-			63.704722429433225},
+			11.25,
+			68.39918004344189},
 		{
-			165.58593749999997,
-			39.095962936305476}}
+			11.25,
+			-0.7031073524364783}}
 	contour1 := NewContour(point1s)
 	contour1.clockwise()
 	polygon1 := NewPolygon([]Contour{contour1})

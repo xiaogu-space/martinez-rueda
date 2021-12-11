@@ -78,7 +78,7 @@ func (c *Contour) getBoundingBox() []orb.Point {
 		}
 	}
 
-	return []orb.Point{orb.Point{minX, minY}, orb.Point{maxX, maxY}}
+	return []orb.Point{{minX, minY}, {maxX, maxY}}
 }
 
 func (c *Contour) counterClockwise() bool {
