@@ -2,10 +2,11 @@ package martinez_rueda
 
 import (
 	"fmt"
-	geojson "github.com/paulmach/go.geojson"
-	"github.com/paulmach/orb"
 	"math"
 	"strings"
+
+	geojson "github.com/paulmach/go.geojson"
+	"github.com/paulmach/orb"
 )
 
 type Polygon struct {
@@ -103,16 +104,31 @@ func (p *Polygon) clear() {
 	p.contours = []Contour{}
 }
 
-func (p *Polygon) ToPolygonGeometry() *geojson.Geometry{
-	apoint := [][]float64{}
+func (p *Polygon) ToPolygonGeometry() *geojson.Geometry {
+	g := geojson.Geometry{}
+	multiPolygon := g.MultiPolygon
+
 	for _, con := range p.contours {
+		line := g.LineString
+
 		for _, point := range con.points {
-			apoint = append(apoint, []float64{point.Lon(), point.Lat()})
+			line = append(line, []float64{point[0], point[1]})
+		}
+
+		if con.cc { //内边框
+			//理论上来说已经存在一个面了
+			polygon := multiPolygon[len(multiPolygon)-1]
+			polygon = append(polygon, line)
+
+			multiPolygon = append(multiPolygon, polygon)
+		} else { //外边框
+			polygon := g.Polygon
+			polygon = [][][]float64{line}
+
+			multiPolygon = append(multiPolygon, polygon)
 		}
 	}
-	return geojson.NewPolygonGeometry([][][]float64{
-		apoint,
-	})
+	return geojson.NewMultiPolygonGeometry(multiPolygon...)
 }
 
 func (p *Polygon) DEBUG() {

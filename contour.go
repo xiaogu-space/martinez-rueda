@@ -1,15 +1,16 @@
 package martinez_rueda
 
 import (
-	"github.com/paulmach/orb"
 	"math"
+
+	"github.com/paulmach/orb"
 )
 
 type Contour struct {
-	points        []orb.Point
-	holes         []int
-	isExternal    bool
-	cc            bool
+	points []orb.Point
+	holes  []int
+	// isExternal    bool
+	cc            bool //false:为外，true:为内
 	precomputedCC *bool
 }
 
@@ -120,13 +121,13 @@ func (c *Contour) setCounterClockwise() {
 	}
 }
 
-func (c *Contour) external() bool {
-	return c.isExternal
-}
+// func (c *Contour) external() bool {
+// 	return c.isExternal
+// }
 
-func (c *Contour) setExternal(flag bool) {
-	c.isExternal = flag
-}
+// func (c *Contour) setExternal(flag bool) {
+// 	c.isExternal = flag
+// }
 
 func (c *Contour) move(x, y float64) {
 	for idx := 0; idx < len(c.points); idx++ {
