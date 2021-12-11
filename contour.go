@@ -8,10 +8,10 @@ import (
 
 type Contour struct {
 	points []orb.Point
-	holes  []int
+	// holes  []int
 	// isExternal    bool
-	cc            bool //false:为外，true:为内
-	precomputedCC *bool
+	cc bool //false:为外，true:为内
+	// precomputedCC *bool
 }
 
 func NewContour(points []orb.Point) Contour {
@@ -31,12 +31,12 @@ func (c *Contour) erase(index int) {
 
 func (c *Contour) clear() {
 	c.points = []orb.Point{}
-	c.holes = []int{}
+	// c.holes = []int{}
 }
 
-func (c *Contour) addHole(index int) {
-	c.holes = append(c.holes, index)
-}
+// func (c *Contour) addHole(index int) {
+// 	c.holes = append(c.holes, index)
+// }
 
 // Get the p-th vertex of the external contour
 func (c *Contour) vertex(index int) orb.Point {
@@ -50,9 +50,9 @@ func (c *Contour) segment(index int) Segment {
 	return NewSegment(c.points[index], c.points[index+1])
 }
 
-func (c *Contour) hole(index int) int {
-	return c.holes[index]
-}
+// func (c *Contour) hole(index int) int {
+// 	return c.holes[index]
+// }
 
 // Get minimum bounding rectangle
 // ['min' => Point, 'max' => Point]
@@ -82,11 +82,11 @@ func (c *Contour) getBoundingBox() []orb.Point {
 }
 
 func (c *Contour) counterClockwise() bool {
-	if c.precomputedCC != nil {
-		return *c.precomputedCC
-	}
-	precomputedCC := true
-	c.precomputedCC = &precomputedCC
+	// if c.precomputedCC != nil {
+	// 	return *c.precomputedCC
+	// }
+	// precomputedCC := true
+	// c.precomputedCC = &precomputedCC
 
 	var area float64
 	for idx := 0; idx < len(c.points)-1; idx++ {
